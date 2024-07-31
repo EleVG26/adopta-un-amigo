@@ -80,7 +80,7 @@ public class DesignMascotaControllerApi {
     //LISTAR DE A 5 MASCOTAS POR PAGINA
     @GetMapping("/page")
     @ApiOperation(value = "Get mascotas paginated")
-    public Page<Mascota> getMascotasPaginated(@RequestParam int page) {
+    public Page<Mascota> getMascotasPaginated(@RequestParam(defaultValue = "0") int page) {
     	Pageable pageable = PageRequest.of(page, 5);
         //Page<Mascota> mascotasPage = mascotaService.getAllMascotas(pageable);
         return mascotaService.getAllMascotas(pageable);

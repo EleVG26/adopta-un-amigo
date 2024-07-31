@@ -31,11 +31,13 @@ public class Mascota {
 	@NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date fechaNac;
+	
 	@NotNull
 	private String raza;
     private Long peso;
     private Boolean tieneChip;
-    private String urlFoto;
+    private String sexo;
+    
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "propietario_id")

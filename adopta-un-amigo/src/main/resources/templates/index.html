@@ -3,22 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <title>Bienvenido</title>
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .hero-section {
+            background-color: #d0e7f5;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            color: #34495e;
+        }
+        .hero-section img {
+            max-width: 100%;
+            height: auto;
+        }
+        .navbar {
+            margin-bottom: 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1 th:text="${message}" class="mt-5"></h1>
-        <nav class="mt-3">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link" href="/mascotas">Ver Mascotas</a></li>
-                <li class="nav-item"><a class="nav-link" href="/propietarios">Ver Propietarios</a></li>
-                <li class="nav-item"><a class="nav-link" href="/contacto">Contacto</a></li>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Adopta un amigo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/mascotas">Peluditos</a>
+                </li>
+               <li class="nav-item">
+                    <a class="nav-link" href="/propietarios">Propietarios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contacto">Contacto</a>
+                </li>
             </ul>
-        </nav>
-    </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 th:text="${message}">The Best Pet Groomers in Town</h1>
+            <p>Da amor y recibe amor incondicional</p>
+            <img src="/images/adopt-me.png" alt="Pets Image">
+        </div>
+    </section>
+
+    <!-- jQuery y Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
 

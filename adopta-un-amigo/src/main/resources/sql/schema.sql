@@ -10,7 +10,7 @@ CREATE TABLE mascota (
     raza VARCHAR(255) NOT NULL,
     peso INT NOT NULL,
     tiene_chip BOOLEAN NOT NULL,
-    url_foto VARCHAR(255) NOT NULL,
+    sexo VARCHAR(255) NOT NULL,
     propietario_id BIGINT,
     FOREIGN KEY (propietario_id) REFERENCES propietario(id)
 );

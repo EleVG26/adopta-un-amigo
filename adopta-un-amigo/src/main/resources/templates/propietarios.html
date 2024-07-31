@@ -2,42 +2,180 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Propietarios - Adopta Un Amigo</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Propietarios</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Adopta Un Amigo</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/mascotas">Mascotas</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/propietarios">Propietarios</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contacto">Contacto</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
     <div class="container">
-        <h1 class="my-4 text-center">Propietarios Registrados</h1>
-        <p class="text-center">Aquí puedes ver todos los propietarios registrados.</p>
-    </div>
-    <footer class="py-4 bg-light mt-auto">
-        <div class="container text-center">
-            <p class="m-0 text-center text-black">© 2024 Adopta Un Amigo. Todos los derechos reservados.</p>
+        <div class="header">
+            <h1>Lista de Propietarios</h1>
+            <a href="/" class="btn btn-primary">Volver al Home</a>
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Mascotas</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="propietarios">
+                <!-- Filas de propietarios se cargarán aquí dinámicamente -->
+            </tbody>
+        </table>
+        <button class="btn btn-success mb-3" data-toggle="modal" data-target="#agregarPropietarioModal">Agregar Propietario</button>
+    </div>
+
+    <!-- Modal para agregar propietario -->
+    <div class="modal fade" id="agregarPropietarioModal" tabindex="-1" role="dialog" aria-labelledby="agregarPropietarioModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarPropietarioModalLabel">Agregar Propietario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="propietarioForm">
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección:</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mascotas">Mascotas:</label>
+                            <select multiple class="form-control" id="mascotas" name="mascotas">
+                                <!-- Opciones de mascotas se cargarán aquí dinámicamente -->
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Función para cargar la lista de propietarios
+            function loadPropietarios() {
+                $.ajax({
+                    url: '/api/propietarios',
+                    type: 'GET',
+                    success: function(data) {
+                        let html = '';
+                        data.forEach(function(propietario) {
+                            html += `<tr>
+                                <td>${propietario.id}</td>
+                                <td>${propietario.nombre}</td>
+                                <td>${propietario.direccion}</td>
+                                <td>${propietario.telefono}</td>
+                                <td>${propietario.mascotas.map(m => m.nombre).join(', ')}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm eliminar-propietario" data-id="${propietario.id}">Eliminar</button>
+                                </td>
+                            </tr>`;
+                        });
+                        $('#propietarios').html(html);
+
+                        // Agregar manejador de eventos para eliminar propietario
+                        $('.eliminar-propietario').on('click', function() {
+                            const id = $(this).data('id');
+                            if (confirm('¿Estás seguro de que quieres eliminar este propietario?')) {
+                                $.ajax({
+                                    url: `/api/propietarios/${id}`,
+                                    type: 'DELETE',
+                                    success: function() {
+                                        alert('Propietario eliminado exitosamente!');
+                                        loadPropietarios();
+                                    },
+                                    error: function(err) {
+                                        console.error('Error eliminando el propietario', err);
+                                    }
+                                });
+                            }
+                        });
+                    },
+                    error: function(err) {
+                        console.error('Error obteniendo los propietarios', err);
+                    }
+                });
+            }
+
+            // Función para cargar la lista de mascotas
+            function loadMascotas() {
+                $.ajax({
+                    url: '/api/mascotas',
+                    type: 'GET',
+                    success: function(data) {
+                        let html = '';
+                        data.forEach(function(mascota) {
+                            html += `<option value="${mascota.id}">${mascota.nombre}</option>`;
+                        });
+                        $('#mascotas').html(html);
+                    },
+                    error: function(err) {
+                        console.error('Error obteniendo las mascotas', err);
+                    }
+                });
+            }
+
+            // Llamar a las funciones para cargar los propietarios y mascotas al cargar la página
+            loadPropietarios();
+            loadMascotas();
+
+            // Manejar el envío del formulario para agregar un nuevo propietario
+            $('#propietarioForm').on('submit', function(event) {
+                event.preventDefault();
+
+                const propietarioData = {
+                    nombre: $('#nombre').val(),
+                    direccion: $('#direccion').val(),
+                    telefono: $('#telefono').val(),
+                    mascotas: $('#mascotas').val()
+                };
+
+                $.ajax({
+                    url: '/api/propietarios',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(propietarioData),
+                    success: function(response) {
+                        alert('Propietario agregado exitosamente!');
+                        $('#propietarioForm')[0].reset();
+                        $('#agregarPropietarioModal').modal('hide');
+                        loadPropietarios();
+                    },
+                    error: function(err) {
+                        console.error('Error agregando el propietario', err);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-

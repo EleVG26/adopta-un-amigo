@@ -24,6 +24,13 @@ public class PropietarioControllerApi {
 	
 	@Autowired
     private PropietarioService propietarioService;
+	
+	//LISTAR TODOS LOS PROPIETARIOS
+    @GetMapping
+    @ApiOperation(value = "Get all propietarios ")
+    public List<Propietario> getAllPropietarios() {
+        return propietarioService.getAllPropietarios();
+    }
 
 	//OBTENER PROPIETARIO POR ID
     @GetMapping("/{id}")
@@ -40,13 +47,7 @@ public class PropietarioControllerApi {
         return propietarioService.savePropietario(propietario);
     }
 
-    //LISTAR TODOS LOS PROPIETARIOS
-    @GetMapping
-    @ApiOperation(value = "Get all propietarios ")
-    public List<Propietario> getAllPropietarios() {
-        return propietarioService.getAllPropietarios();
-    }
-
+   
     
     //ELIMINAR PROPIETARIO POR ID
     @DeleteMapping("/{id}")
