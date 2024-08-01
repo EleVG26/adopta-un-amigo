@@ -5,31 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto - Adopta Un Amigo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .contact-section {
+            background-color: #d0e7f5;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .contact-section h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .contact-section p {
+            font-size: 1.25rem;
+            color: #34495e;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .contact-info .contact-item {
+            flex: 1;
+            min-width: 200px;
+            margin: 20px;
+            text-align: center;
+        }
+        .contact-info .contact-item img {
+            height: 50px;
+            margin-bottom: 20px;
+        }
+        .contact-info .contact-item h5 {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .header-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header-container img {
+            margin-right: 15px;
+        }
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Adopta Un Amigo</a>
+        <a class="navbar-brand" href="#">Adopta un amigo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">index</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/mascotas">Mascotas</a>
+                    <a class="nav-link" href="/mascotas">Peluditos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/propietarios">Propietarios</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/contacto">Contacto</a>
-                </li>
             </ul>
         </div>
     </nav>
-    <div class="container">
-        <h1 class="my-4 text-center">Contacto</h1>
-        <p class="text-center">Puedes contactarnos a través del correo info@adoptaunamigo.com</p>
-    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="header-container">
+                <img src="/images/garrita.png" alt="Garritas de Perrito" width="50" height="50">
+                <h1 class="my-4">Contáctanos</h1>
+            </div>
+            <p>Recuerda: Adoptar un perrito es darle una segunda oportunidad a un amigo fiel y ganar un amor incondicional para toda la vida.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <img src="/images/ubicacion.png" alt="Ubicación">
+                    <h5>VISITANOS</h5>
+                    <p>27 13 Medellín, Antioquia</p>
+                </div>
+                <div class="contact-item">
+                    <img src="/images/telefono.png" alt="Teléfono">
+                    <h5>TELÉFONO</h5>
+                    <p>111 343 43 43</p>
+                </div>
+                <div class="contact-item">
+                    <img src="/images/correo.png" alt="Correo Electrónico">
+                    <h5>CORREO ELECTRÓNICO</h5>
+                    <p>info@adoptaunamigo.com</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="py-4 bg-light mt-auto">
         <div class="container text-center">
             <p class="m-0 text-center text-black">© 2024 Adopta Un Amigo. Todos los derechos reservados.</p>

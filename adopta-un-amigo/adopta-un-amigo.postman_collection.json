@@ -1,0 +1,286 @@
+{
+	"info": {
+		"_postman_id": "1f26f7ad-2f35-4426-9aad-31f60f950306",
+		"name": "Adopta-un-amigo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37337893"
+	},
+	"item": [
+		{
+			"name": "Mascotas",
+			"item": [
+				{
+					"name": "Listar todas las mascotas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/mascotas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"mascotas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar mascota por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/mascotas/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"mascotas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar 5 mascotas por pagina",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/mascotas/page?page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"mascotas",
+								"page"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar mascotas jovenes 20",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/mascotas/youngest",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"mascotas",
+								"youngest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear mascota",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"nombre\": \"Gali2\",\r\n        \"fechaNac\": \"2020-01-01\",\r\n        \"raza\": \"Shetland\",\r\n        \"peso\": 10,\r\n        \"tieneChip\": false\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/mascotas?propietarioId=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"mascotas"
+							],
+							"query": [
+								{
+									"key": "propietarioId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar mascotas por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/mascotas/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"mascotas",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar mascotas por nombre",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/mascotas/nombre/:nombre",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"mascotas",
+								"nombre",
+								":nombre"
+							],
+							"variable": [
+								{
+									"key": "nombre",
+									"value": "Luna"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Propietario",
+			"item": [
+				{
+					"name": "Listar los propietarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/propietarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"propietarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar propietario por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/propietarios/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"propietarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar los propietarios por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/propietarios/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"propietarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crear propietario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"nombre\": \"Maria Vega\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/propietarios",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"propietarios"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

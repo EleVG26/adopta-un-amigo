@@ -16,21 +16,26 @@
             align-items: center;
             margin-bottom: 20px;
         }
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Lista de Propietarios</h1>
-            <a href="/" class="btn btn-primary">Volver al Home</a>
+            <div class="header-buttons">
+                <a href="/" class="btn btn-primary">Volver al Home</a>
+                <a href="/mascotas" class="btn btn-secondary">Ir a Mascotas</a>
+            </div>
         </div>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Dirección</th>
-                    <th>Teléfono</th>
                     <th>Mascotas</th>
                     <th>Acciones</th>
                 </tr>
@@ -55,22 +60,8 @@
                 <div class="modal-body">
                     <form id="propietarioForm">
                         <div class="form-group">
-                            <label for="nombre">Nombre:</label>
+                            <label for="nombre">Nombre Completo (sin comas ni puntos):</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="direccion">Dirección:</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefono">Teléfono:</label>
-                            <input type="text" class="form-control" id="telefono" name="telefono" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="mascotas">Mascotas:</label>
-                            <select multiple class="form-control" id="mascotas" name="mascotas">
-                                <!-- Opciones de mascotas se cargarán aquí dinámicamente -->
-                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Agregar</button>
                     </form>
@@ -92,8 +83,6 @@
                             html += `<tr>
                                 <td>${propietario.id}</td>
                                 <td>${propietario.nombre}</td>
-                                <td>${propietario.direccion}</td>
-                                <td>${propietario.telefono}</td>
                                 <td>${propietario.mascotas.map(m => m.nombre).join(', ')}</td>
                                 <td>
                                     <button class="btn btn-danger btn-sm eliminar-propietario" data-id="${propietario.id}">Eliminar</button>
@@ -126,37 +115,15 @@
                 });
             }
 
-            // Función para cargar la lista de mascotas
-            function loadMascotas() {
-                $.ajax({
-                    url: '/api/mascotas',
-                    type: 'GET',
-                    success: function(data) {
-                        let html = '';
-                        data.forEach(function(mascota) {
-                            html += `<option value="${mascota.id}">${mascota.nombre}</option>`;
-                        });
-                        $('#mascotas').html(html);
-                    },
-                    error: function(err) {
-                        console.error('Error obteniendo las mascotas', err);
-                    }
-                });
-            }
-
-            // Llamar a las funciones para cargar los propietarios y mascotas al cargar la página
+            // Llamar a la función para cargar los propietarios al cargar la página
             loadPropietarios();
-            loadMascotas();
 
             // Manejar el envío del formulario para agregar un nuevo propietario
             $('#propietarioForm').on('submit', function(event) {
                 event.preventDefault();
 
                 const propietarioData = {
-                    nombre: $('#nombre').val(),
-                    direccion: $('#direccion').val(),
-                    telefono: $('#telefono').val(),
-                    mascotas: $('#mascotas').val()
+                    nombre: $('#nombre').val()
                 };
 
                 $.ajax({
